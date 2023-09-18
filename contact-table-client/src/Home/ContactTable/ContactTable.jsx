@@ -188,6 +188,13 @@ const ContactTable = () => {
       width: 130,
     },
     {
+      field: "createdAt",
+      headerName: "Created At",
+      width: 130,
+      type: "date",
+      valueGetter: ({ value }) => value && new Date(value),
+    },
+    {
       field: "actions",
       headerName: "Actions",
       sortable: false,
@@ -278,21 +285,22 @@ const ContactTable = () => {
                 </span>
               </div>
             </div>
-            <DataGrid
-              rows={filteredData}
-              columns={columns}
-              slots={{ toolbar: CustomToolbar }}
-              getRowId={(contactData) => contactData._id}
-              checkboxSelection
-              pageSizeOptions={[5]}
-              hideFooterPagination={true}
-              loading={isLoading}
-              disableRowSelectionOnClick
-              onRowSelectionModelChange={(ids) => {
-                setselectedCheckBox(ids.length);
-              }}
-              autoHeight
-            />
+            <div className="datagrid">
+              <DataGrid
+                rows={filteredData}
+                columns={columns}
+                slots={{ toolbar: CustomToolbar }}
+                getRowId={(contactData) => contactData._id}
+                checkboxSelection
+                pageSizeOptions={[5]}
+                hideFooterPagination={true}
+                loading={isLoading}
+                disableRowSelectionOnClick
+                onRowSelectionModelChange={(ids) => {
+                  setselectedCheckBox(ids.length);
+                }}
+              />
+            </div>
           </TableContainer>
         </div>
       ) : (
